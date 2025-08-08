@@ -23,9 +23,9 @@ const App = () => {
 
 
     return (
-        <div className="bg-primary h-screen">
+        <div className="bg-secondary h-screen">
             <TitleBar />
-            <div>
+            <div className="flex">
                 <Tasks getAllTasks={getAllTasks} tasks={tasks}/>
                 <ViewTaskBar />
             </div>

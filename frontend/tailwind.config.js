@@ -8,7 +8,7 @@ export default {
     extend: {
       backgroundColor: {
         "primary": "#202020",
-        "secondary": "#101010",
+        "secondary": "#151515",
       }
     },
   },

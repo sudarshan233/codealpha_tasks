@@ -7,7 +7,7 @@ const Tasks = (props) => {
         getAllTasks();
     }, [])
     return (
-        <div className="h-auto bg-secondary w-auto rounded-tr-xl rounded-br-xl">
+        <div className="h-auto p-6 bg-secondary w-3/5 ">
             {tasks.map((task, index) => {
                 return (
                     <Task key={index} task={task} />
