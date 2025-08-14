@@ -3,10 +3,13 @@ import Tasks from './Components/Tasks.jsx';
 import ViewTaskBar from './Components/ViewTaskBar.jsx';
 import TitleBar from './Components/TitleBar.jsx';
 import {api} from "../lib/axios.js";
+import {Search} from "lucide-react";
 
 const App = () => {
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([])
+    const [allTasks, setAllTasks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
 
     const getAllTasks = async () => {
         try {
@@ -21,12 +24,25 @@ const App = () => {
         }
     }
 
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setSearch(value);
+        console.log("Searching: ", value);
+        if (search.length > 0) {
+            const filteredTasks = allTasks.filter((task) => {
+                return task.taskName.toLowerCase().startsWith(value.toLowerCase());
+            });
+            setTasks(filteredTasks);
+        } else {
+            setTasks(allTasks);
+        }
+    }
 
     return (
         <div className="bg-secondary h-screen">
             <TitleBar />
             <div className="flex">
-                <Tasks getAllTasks={getAllTasks} tasks={tasks}/>
+                <Tasks getAllTasks={getAllTasks} tasks={tasks} handleChange={handleChange} search={search}/>
                 <ViewTaskBar />
             </div>
         </div>
