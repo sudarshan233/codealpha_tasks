@@ -11,6 +11,10 @@ const App = () => {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
 
+    const [expandView, setExpandView] = useState("hidden");
+    const [tasksView, setTasksView] = useState("w-full");
+    const [searchIconPosition, setSearchIconPosition] = useState("left-[570px]");
+
     const getAllTasks = async () => {
         try {
             const response = await api.get('/');
@@ -22,6 +26,19 @@ const App = () => {
         finally {
             setLoading(false);
         }
+    }
+
+    const addTask = async (task) => {
+      const {taskName, steps, description} = task;
+      try {
+        await api.post('/create', {
+          taskName,
+          steps,
+          description,
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     const handleChange = (e) => {
@@ -42,8 +59,9 @@ const App = () => {
         <div className="bg-secondary h-screen">
             <TitleBar />
             <div className="flex">
-                <Tasks getAllTasks={getAllTasks} tasks={tasks} handleChange={handleChange} search={search}/>
-                <ViewTaskBar />
+                <Tasks getAllTasks={getAllTasks} tasks={tasks} handleChange={handleChange} search={search}
+                setExpandView={setExpandView} tasksView={tasksView} setTasksView={setTasksView} searchIconPosition={searchIconPosition} setSearchIconPosition={setSearchIconPosition} />
+                <ViewTaskBar expandView={expandView} setExpandView={setExpandView} addTask={addTask} />
             </div>
         </div>
     )

@@ -6,7 +6,7 @@ const Description = () => {
     return (
         <div className="flex gap-4 ">
             <AlignLeft className="stroke-accent"/>
-            <textarea className={`bg-primary text-base text-primary outline-0 border-2 border-accent hover:opacity-100 opacity-50 transition-opacity rounded-xl w-full h-40 p-2`}
+            <textarea className={`bg-primary text-base text-primary outline-0 border-2 border-accent hover:opacity-100 opacity-50 transition-opacity rounded w-full h-40 p-2`}
                       placeholder="Add a description"
                       onMouseOver={() => {
                           setStyles("opacity-100");

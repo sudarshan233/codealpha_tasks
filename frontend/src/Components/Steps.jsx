@@ -4,7 +4,7 @@ import {useState} from "react";
 const Steps = () => {
     const [styles, setStyles] = useState("opacity-50");
     return (
-        <div className={`flex border-2 border-accent ${styles} rounded-xl box-border p-2`} onMouseOver={() => {
+        <div className={`flex border-2 border-accent ${styles} rounded box-border p-2`} onMouseOver={() => {
             setStyles("opacity-100");
         }} onMouseLeave={() => {
             setStyles("opacity-50");
