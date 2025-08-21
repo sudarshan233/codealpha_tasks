@@ -25,7 +25,7 @@ const Tasks = (props) => {
                 onClick={() => {
                   setExpandView("flex flex-col gap-6 rounded-tl-2xl bg-primary p-6 w-2/5 h-screen")
                   setTasksView("w-3/5");
-                  setSearchIconPosition("left-[285px]");
+                  setSearchIconPosition("left-[190px]");
                 }}>
                   <Plus className="stroke-primary w-4 h-4 box-content pt-1 pr-2" />
                   Add new task

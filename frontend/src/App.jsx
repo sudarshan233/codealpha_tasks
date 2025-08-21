@@ -13,7 +13,7 @@ const App = () => {
 
     const [expandView, setExpandView] = useState("hidden");
     const [tasksView, setTasksView] = useState("w-full");
-    const [searchIconPosition, setSearchIconPosition] = useState("left-[570px]");
+    const [searchIconPosition, setSearchIconPosition] = useState("left-[430px]");
 
     const getAllTasks = async () => {
         try {
