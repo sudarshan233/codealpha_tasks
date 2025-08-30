@@ -1,8 +1,9 @@
 import {AlignLeft} from "lucide-react";
 import {useState} from "react";
 
-const Description = () => {
+const Description = (props) => {
     const [styles, setStyles] = useState("opacity-50");
+    const {description, setDescription} = props;
     return (
         <div className="flex gap-4 ">
             <AlignLeft className="stroke-accent"/>
@@ -14,6 +15,8 @@ const Description = () => {
                       onMouseLeave={() => {
                           setStyles("opacity-50");
                       }}
+                      value={description}
+                      onChange={(event) => setDescription(event.target.value)}
             />
         </div>
     )

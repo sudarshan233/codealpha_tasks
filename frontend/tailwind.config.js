@@ -12,6 +12,10 @@ export default {
         "tertiary": "#252525",
         "accent": "#9B7EBD"
       },
+      backgroundImage: {
+        'heroPattern' : "url(\"https://www.transparenttextures.com/patterns/dark-tire.png\");"
+
+      },
       textColor: {
         "primary": "#F2F2F2"
       },
@@ -22,6 +26,9 @@ export default {
       borderColor: {
         "accent": "#9B7EBD",
         "primary": "#F2F2F2"
+      },
+      shadowColor: {
+        "accent": "#9B7EBD"
       }
     },
   },
