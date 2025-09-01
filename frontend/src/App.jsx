@@ -62,7 +62,6 @@ const App = () => {
         finally {
             setExpandView("hidden");
             setTasksView("w-full");
-            setSearchIconPosition("left-[430px]");
             setTaskName("");
             setSteps([]);
             setStep("");
@@ -75,7 +74,6 @@ const App = () => {
         setClickedTask(taskId);
         setExpandView("flex flex-col gap-6 rounded-tl-2xl p-6 w-2/5 h-screen")
         setTasksView("w-3/5");
-        setSearchIconPosition("left-[190px]");
         const oldTask = tasks.find((task) => task._id === taskId);
         setTaskName(oldTask.taskName);
         setDescription(oldTask.description);
@@ -112,7 +110,6 @@ const App = () => {
         finally {
             setExpandView("hidden");
             setTasksView("w-full");
-            setSearchIconPosition("left-[430px]");
             setTaskName("");
             setSteps([]);
             setStep("");

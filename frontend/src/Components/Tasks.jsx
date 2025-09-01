@@ -42,6 +42,7 @@ const Tasks = (props) => {
                   setExpandView("flex flex-col gap-6 rounded-tl-2xl p-6 w-2/5")
                   setTasksView("w-3/5");
                   setSearchBarPosition(1/5);
+
                 }}>
                   <Plus className="stroke-primary w-4 h-4 box-content pt-1 pr-2" />
                   Add new task
