@@ -5,7 +5,7 @@ import HandleEmptyTasks from "./HandleEmptyTasks.jsx";
 import {api} from "../../lib/axios.js";
 
 const Tasks = (props) => {
-    const { tasks, setTasks, setLoading,
+    const { tasks, setTasks, setLoading, refresh,
       setAllTasks, handleChange, search,
       setExpandView, tasksView,
       setTasksView, viewTask, deleteTask,
@@ -27,15 +27,14 @@ const Tasks = (props) => {
             }
         }
         getAllTasks();
-    }, [])
+    }, [refresh])
 
     return (
         <div className={`flex flex-col gap-6 h-auto py-6 pl-6 pr-10 ${tasksView}`}>
             <section className="flex gap-3 w-full justify-between">
               <div className={`flex h-8 ${searchBarPosition} bg-primary rounded justify-between`}>
                 <input onChange={handleChange} value={search} className={`bg-primary text-primary outline-0 h-8 p-4 rounded`} placeholder="Search by title"/>
-                  <Search className="stroke-accent w-4 h-4 mr-2 box-content"/>
-
+                  <Search className="stroke-accent w-4 h-4 mt-2 mr-2 box-content"/>
               </div>
               <div className="flex gap-3">
                 <button className="flex w-max hover:bg-accent bg-secondary transition-bg duration-[0.4s] px-4 py-2 rounded border border-accent text-primary"

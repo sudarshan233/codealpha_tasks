@@ -6,7 +6,7 @@ import React from 'react';
 
 const ViewTaskBar = (props) => {
   const {expandView, setExpandView,
-      setTasksView, setSearchIconPosition,
+      setTasksView,
       addTask, editTask, taskName, setTaskName,
       steps, setSteps, step, setStep, description, setDescription,
       clickToView} = props;
@@ -37,13 +37,12 @@ const ViewTaskBar = (props) => {
               <Description description={description} setDescription={setDescription}/>
             </section>
             <section className="flex gap-2 self-end">
-              <button onClick={() => {
+              <div onClick={() => {
                   setExpandView("hidden");
                   setTasksView("w-full");
-                  setSearchIconPosition("left-[430px]");
-              }} className="flex w-max hover:bg-tertiary bg-primary transition-bg duration-[0.4s] px-4 py-2 rounded border border-accent text-primary">
+              }} className="flex cursor-pointer w-max hover:bg-tertiary bg-primary transition-bg duration-[0.4s] px-4 py-2 rounded border border-accent text-primary">
                 Cancel
-              </button>
+              </div>
                 {clickToView === true ? <button type="submit" onClick={editTask} className="flex w-max bg-accent  px-4 py-2 rounded border border-accent text-primary">
                     <SquarePen className="stroke-primary w-4 h-4 box-content pt-1 pr-2" />
                     Edit task

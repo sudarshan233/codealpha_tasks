@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import toast from "react-hot-toast";
+import {api} from "../lib/axios.js";
+
 import Tasks from './Components/Tasks.jsx';
 import ViewTaskBar from './Components/ViewTaskBar.jsx';
 import TitleBar from './Components/TitleBar.jsx';
-import {api} from "../lib/axios.js";
 
 const App = () => {
     const [tasks, setTasks] = useState([])
@@ -17,16 +19,23 @@ const App = () => {
 
     const [clickToView, setClickToView] = useState(false);
     const [clickedTask, setClickedTask] = useState("");
+    const [refresh, setRefresh] = useState(false);
 
     const [expandView, setExpandView] = useState("hidden");
     const [tasksView, setTasksView] = useState("w-full");
-    const [searchIconPosition, setSearchIconPosition] = useState("left-[430px]");
-    const [completedTask, setCompletedTask] = useState('');
 
     const addTask = async (event) => {
         event.preventDefault();
         console.log(taskName, steps, description);
-
+        if(!taskName || !steps || !description ) {
+            toast.error('All fields are required', {
+                style: {
+                    background: "#252525",
+                    color: "#F2F2F2",
+                }
+            });
+            return;
+        }
         try {
             await api.post('/create', {
                 taskName,
@@ -34,8 +43,21 @@ const App = () => {
                 description,
                 statusOfTask: false,
             });
+            toast.success('Task added successfully.', {
+                style: {
+                    background: "#252525",
+                    color: "#F2F2F2",
+                }
+            });
+            setRefresh(!refresh);
         } catch (error) {
             console.log(error);
+            toast.error('Error while adding task', {
+                style: {
+                    background: "#252525",
+                    color: "#F2F2F2",
+                }
+            });
         }
         finally {
             setExpandView("hidden");
@@ -72,8 +94,20 @@ const App = () => {
                 "statusOfTask": false
             });
             setClickToView(false);
+            toast.success('Task edited successfully.', {
+                style: {
+                    background: "#252525",
+                    color: "#F2F2F2",
+                }
+            });
         } catch (error) {
             console.log(error);
+            toast.error('Error while editing task', {
+                style: {
+                    background: "#252525",
+                    color: "#F2F2F2",
+                }
+            });
         }
         finally {
             setExpandView("hidden");
@@ -90,8 +124,21 @@ const App = () => {
         try {
             await api.delete(`/${taskId}`);
             setTasks(tasks.filter(task => task.id !== taskId));
+            setRefresh(!refresh);
+            toast.success('Task deleted successfully.', {
+                style: {
+                    background: "#252525",
+                    color: "#F2F2F2",
+                }
+            });
         } catch (error) {
             console.log(error);
+            toast.error('Error while deleting task', {
+                style: {
+                    background: "#252525",
+                    color: "#F2F2F2",
+                }
+            });
         }
     }
 
@@ -102,6 +149,13 @@ const App = () => {
                     ...task,
                     statusOfTask: true
                 })
+                toast.success('Task Mastered. Congratulations!!', {
+                    icon: '🎉🎉',
+                    style: {
+                        background: "#252525",
+                        color: "#F2F2F2",
+                    }
+                });
             } else {
                 await api.put(`/${task._id}`, {
                     ...task,
@@ -132,10 +186,9 @@ const App = () => {
             <TitleBar />
             <div className="flex">
                 <Tasks
-                    setAllTasks={setAllTasks} setLoading={setLoading} setTasks={setTasks} tasks={tasks} handleChange={handleChange} search={search} viewTask={viewTask}
+                    setAllTasks={setAllTasks} refresh={refresh} setLoading={setLoading} setTasks={setTasks} tasks={tasks} handleChange={handleChange} search={search} viewTask={viewTask}
                     setExpandView={setExpandView} tasksView={tasksView} setTasksView={setTasksView}
-                    searchIconPosition={searchIconPosition} deleteTask={deleteTask} completedTask={completedTask}
-                    setCompletedTask={setCompletedTask} toggleTask={toggleTask}/>
+                    deleteTask={deleteTask} toggleTask={toggleTask}/>
                 <ViewTaskBar
                     expandView={expandView} setExpandView={setExpandView}
                     addTask={addTask} editTask={editTask} setTasksView={setTasksView}
@@ -143,8 +196,7 @@ const App = () => {
                     steps={steps} setSteps={setSteps}
                     step={step} setStep={setStep}
                     description={description} setDescription={setDescription}
-                    setSearchIconPosition={setSearchIconPosition}
-                    setClickToView={setClickToView} clickToView={clickToView}
+                    clickToView={clickToView}
                 />
             </div>
         </div>
