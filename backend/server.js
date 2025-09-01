@@ -14,9 +14,7 @@ const __dirname = path.resolve()
 connectDB();
 app.use(cors());
 app.use(express.json());
-app.use('/api/tasks', router);
-
-if(process.env.NODE_ENV === 'production') {
+if(process.env.NODE_ENV !== 'production') {
     app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
     app.get('/', (req, res) => {
@@ -24,6 +22,7 @@ if(process.env.NODE_ENV === 'production') {
     })
 
 }
+app.use('/api/tasks', router);
 app.listen(PORT, (error) => {
     if(error) console.error(error);
     console.log(`Server is running on port ${PORT}`);
